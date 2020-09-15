@@ -1,106 +1,72 @@
-import React from "react"
-import { View, Image, ImageBackground } from "react-native"
+import React, { Component } from 'react'
 import {
-  withStyles,
+  AppRegistry,
+  StyleSheet,
   Text,
+  View,
   Button,
-  CheckBox,
-  Radio,
-  Toggle,
-  Icon,
-  Input,
-  Datepicker
-} from "react-native-ui-kitten"
-import Slider from "@react-native-community/slider"
+  TextInput
+} from 'react-native'
 
-import { SlideMenuIcon } from "../../../navigator/slideMenuIcon"
-
-export class _Blank extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      headerLeft: <SlideMenuIcon navigationProps={navigation} />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: ''
+    };
+  }
+  
+  welcomeUser(name) {
+    if (name) {
+      return <Text style={styles.text}>Hello {name}!</Text>;
     }
   }
 
-  state = {}
-
-  render = () => (
-    <View
-      style={{
-        width: "100%",
-        height: "100%",
-        marginLeft: 0,
-        marginRight: 0,
-        marginTop: 0,
-        marginBottom: 0,
-        paddingLeft: 0,
-        paddingRight: 0,
-        paddingTop: 0,
-        paddingBottom: 0,
-        overflow: "visible",
-        textAlign: "left",
-        verticalAlign: "baseline",
-        fontSize: 12,
-        color: "#000000",
-        backgroundColor: "#ffffff",
-        fontFamily: "Roboto-Regular",
-        flexDirection: "column",
-        flexWrap: "wrap",
-        justifyContent: "flex-start",
-        alignItems: "stretch",
-        alignContent: "stretch",
-        borderColor: "#000000",
-        borderStyle: "solid",
-        borderWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderTopWidth: 0,
-        borderBottomWidth: 0,
-        borderRadius: 0,
-        backgroundSize: "auto"
-      }}
-    >
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          marginLeft: 0,
-          marginRight: 0,
-          marginTop: 0,
-          marginBottom: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-          paddingTop: 0,
-          paddingBottom: 0,
-          overflow: "visible",
-          textAlign: "left",
-          verticalAlign: "baseline",
-          fontSize: 13,
-          color: "#000000",
-          backgroundColor: "#000000",
-          fontFamily: "Roboto-Regular",
-          flexDirection: "column",
-          flexWrap: "wrap",
-          justifyContent: "flex-start",
-          alignItems: "stretch",
-          alignContent: "stretch",
-          borderColor: "#000000",
-          borderStyle: "solid",
-          borderWidth: 0,
-          borderLeftWidth: 0,
-          borderRightWidth: 0,
-          borderTopWidth: 0,
-          borderBottomWidth: 0,
-          borderRadius: 0,
-          backgroundSize: "auto"
-        }}
-      />
-    </View>
-  )
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          My App
+        </Text>
+        <Text style={styles.text}>
+          Enter your name!
+        </Text>
+        <TextInput
+          style={styles.input}
+          value={this.state.name}
+          onChangeText={(text) => this.setState({ name: text })}
+        />
+        {this.welcomeUser(this.state.name)}
+      </View>
+    )
+  }
 }
 
-export default Blank = withStyles(_Blank, theme => ({
+const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme["color-basic-100"]
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FC9F',
+  },
+  welcome: {
+    fontSize: 24,
+    textAlign: 'center',
+    color: 'rgb(97, 218, 251)'
+  },
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 20
+  },
+  input: {
+    height: 40,
+    borderColor: 'lightgrey',
+    borderWidth: 4,
+    width: 150,
+    fontSize: 10,
+    padding: 8
   }
-}))
+})
+
+AppRegistry.registerComponent('App', () => App)
